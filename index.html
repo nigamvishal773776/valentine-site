@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine Proposal 💖</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(to bottom right, #ffd6e0, #ff8fab);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 15px;
+      position: relative;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 35px 25px;
+      border-radius: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      max-width: 600px;
+      width: 100%;
+      z-index: 5;
+      position: relative;
+    }
+
+    h1 {
+      font-family: "Great Vibes", cursive;
+      font-size: 2.7rem;
+      color: #c9184a;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .btn-area {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 12px 32px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font-weight: 600;
+      min-width: 120px;
+    }
+
+    #yesBtn {
+      background: #ff4d6d;
+      color: white;
+      box-shadow: 0 6px 15px rgba(255, 77, 109, 0.5);
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.07);
+      background: #ff2f5c;
+    }
+
+    #noBtn {
+      background: white;
+      color: #ff4d6d;
+      border: 2px solid #ff4d6d;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+      position: relative;
+    }
+
+    #noBtn:hover {
+      background: #ffe6ec;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .message {
+      margin-top: 18px;
+      font-size: 1.25rem;
+      color: #a4133c;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    #forYouBtn {
+      margin-top: 22px;
+      background: #c9184a;
+      color: white;
+      padding: 12px 35px;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      box-shadow: 0 6px 15px rgba(201, 24, 74, 0.45);
+    }
+
+    #forYouBtn:hover {
+      background: #a4133c;
+      transform: scale(1.05);
+    }
+
+    .gif-box {
+      margin-top: 20px;
+    }
+
+    .gif-box img {
+      width: 260px;
+      max-width: 95%;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    /* Falling animation elements */
+    .falling {
+      position: absolute;
+      top: -30px;
+      font-size: 28px;
+      animation: fall linear forwards;
+      z-index: 1;
+      opacity: 0.95;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 2.1rem;
+      }
+
+      button {
+        font-size: 1rem;
+        padding: 10px 22px;
+        width: 140px;
+      }
+
+      .message {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Hey Vidhi, Will you be my Valentine? 💖</h1>
+
+    <div class="btn-area" id="btnArea">
+      <button id="yesBtn">Yes 💕</button>
+      <button id="noBtn">No 😢</button>
+    </div>
+
+    <div id="result" class="hidden">
+      <p class="message">
+        Yayyyy Vidhi 😭💘 <br><br>
+        You just made my heart the happiest ❤️✨ <br>
+        From today, you’re officially my Valentine 💍🌹 <br><br>
+        I promise to always keep you smiling forever 💕
+      </p>
+
+      <button id="forYouBtn">For You 💝</button>
+
+      <div id="gifBox" class="gif-box hidden">
+        <!-- Replace this with your own GIF file name -->
+        <img src="mygif.gif" alt="Special Gift GIF">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const result = document.getElementById("result");
+    const forYouBtn = document.getElementById("forYouBtn");
+    const gifBox = document.getElementById("gifBox");
+
+    // NO button moves but stays inside the screen
+    function moveNoButton() {
+      const padding = 15;
+
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
+
+      const maxX = window.innerWidth - btnWidth - padding;
+      const maxY = window.innerHeight - btnHeight - padding;
+
+      const randomX = Math.floor(Math.random() * (maxX - padding + 1)) + padding;
+      const randomY = Math.floor(Math.random() * (maxY - padding + 1)) + padding;
+
+      noBtn.style.position = "absolute";
+      noBtn.style.left = randomX + "px";
+      noBtn.style.top = randomY + "px";
+    }
+
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("touchstart", moveNoButton);
+
+    // Falling Hearts + Confetti + Rose Petals
+    function startRomanticRain() {
+      setInterval(() => {
+        const element = document.createElement("div");
+        element.classList.add("falling");
+
+        const emojis = ["💖", "🌹", "💕", "🌸", "❤️", "💘", "🎉", "✨", "💐"];
+        element.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+
+        element.style.left = Math.random() * window.innerWidth + "px";
+        element.style.fontSize = Math.random() * 18 + 18 + "px";
+        element.style.animationDuration = Math.random() * 3 + 3 + "s";
+
+        document.body.appendChild(element);
+
+        setTimeout(() => {
+          element.remove();
+        }, 7000);
+      }, 150);
+    }
+
+    // YES button click
+    yesBtn.addEventListener("click", () => {
+      result.classList.remove("hidden");
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+
+      startRomanticRain();
+    });
+
+    // For You button click -> show gif
+    forYouBtn.addEventListener("click", () => {
+      gifBox.classList.remove("hidden");
+      forYouBtn.style.display = "none";
+    });
+  </script>
+
+</body>
+</html>
